@@ -4,22 +4,33 @@
     {
       "label": "Playwright: test",
       "type": "shell",
-      "command": "npm.cmd test",
+      "command": "& 'C:\\Program Files\\nodejs\\npm.cmd' test",
       "group": "test",
-      "problemMatcher": []
+      "problemMatcher": [],
+      "options": { "env": { "PATH": "C:\\Program Files\\nodejs;${env:PATH}" } }
     },
     {
       "label": "Playwright: test headed",
       "type": "shell",
-      "command": "npm.cmd run test:headed",
+      "command": "& 'C:\\Program Files\\nodejs\\npm.cmd' run test:headed",
       "group": "test",
-      "problemMatcher": []
+      "problemMatcher": [],
+      "options": { "env": { "PATH": "C:\\Program Files\\nodejs;${env:PATH}" } }
     },
     {
       "label": "Playwright: report",
       "type": "shell",
-      "command": "npm.cmd run report",
-      "problemMatcher": []
+      "command": "& 'C:\\Program Files\\nodejs\\npm.cmd' run report",
+      "problemMatcher": [],
+      "options": { "env": { "PATH": "C:\\Program Files\\nodejs;${env:PATH}" } }
+    },
+    {
+      "label": "Cucumber: Salesforce login",
+      "type": "shell",
+      "command": "& 'C:\\Program Files\\nodejs\\npm.cmd' run bdd",
+      "group": "test",
+      "problemMatcher": [],
+      "options": { "env": { "PATH": "C:\\Program Files\\nodejs;${env:PATH}" } }
     }
   ]
 }

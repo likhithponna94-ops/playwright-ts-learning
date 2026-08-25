@@ -7,6 +7,8 @@
     "test": "playwright test",
     "test:headed": "playwright test --headed",
     "test:debug": "playwright test --debug",
+    "bdd": "cucumber-js",
+    "bdd:headed": "cross-env HEADED=true cucumber-js",
     "report": "playwright show-report",
     "typecheck": "tsc --noEmit"
   },
@@ -15,8 +17,11 @@
   "license": "MIT",
   "type": "commonjs",
   "devDependencies": {
+    "@cucumber/cucumber": "^13.2.1",
     "@playwright/test": "^1.62.1",
     "@types/node": "^26.3.0",
+    "cross-env": "^10.1.0",
+    "ts-node": "^10.9.2",
     "tsx": "^4.23.12",
     "typescript": "^7.0.2"
   }
