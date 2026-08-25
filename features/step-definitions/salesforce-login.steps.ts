@@ -32,9 +32,9 @@ When('I click the {string} button', async (buttonText: string) => {
 
 When('I enter my business email', async () => {
   const email = process.env.SALESFORCE_EMAIL ?? 'likhith.ponna94@gmail.com';
-  await page.getByLabel('Business email').fill(email);
+  await page.getByRole('textbox', { name: 'Business email' }).fill(email);
 });
 
 Then('the Salesforce login flow should continue', async () => {
-  await expect(page.getByLabel('Business email')).not.toBeVisible();
+  await expect(page.getByRole('textbox', { name: 'Business email' })).not.toBeVisible();
 });
