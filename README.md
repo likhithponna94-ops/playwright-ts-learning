@@ -9,13 +9,52 @@ npm.cmd test
 npm.cmd run typecheck
 npm.cmd run test:headed
 npm.cmd run report
+npm.cmd run bdd
+npm.cmd run bdd:headed
 ```
 
 The first command runs the tests headlessly. The headed command opens Chromium so you can watch the test. The report command opens the last HTML report.
 
+## Salesforce Trailhead BDD test
+
+The Salesforce login starter is written in Gherkin and TypeScript:
+
+- `features/salesforce-login.feature`: business-readable scenario.
+- `features/step-definitions/salesforce-login.steps.ts`: Playwright step definitions and browser setup.
+- `cucumber.js`: Cucumber TypeScript loader configuration.
+
+Run only this feature with `npm.cmd run bdd`. To watch it in Chromium, run `npm.cmd run bdd:headed`. The default email is `likhith.ponna94@gmail.com`; override it without editing code:
+
+To run the tagged debug scenario only in a new Microsoft Edge window, use:
+
+```powershell
+yarn debug
+```
+
+The Edge window is closed automatically after the scenario completes, including after a failed step. The equivalent npm command is `npm.cmd run debug`.
+
+```powershell
+$env:SALESFORCE_EMAIL = "your-test-email@example.com"
+npm.cmd run bdd
+```
+
+This starter stops after clicking `Next`. Add password and MFA steps only for an approved test account and test environment; do not commit credentials. For CI, store them as GitHub Actions secrets and expose them as environment variables.
+
+## Start login automation
+
+The runnable example uses [Sauce Demo](https://www.saucedemo.com). It includes a successful login and an invalid-credentials check:
+
+```powershell
+npm.cmd test -- tests/login.spec.ts
+npm.cmd run test:headed -- tests/login.spec.ts
+```
+
+Login selectors live in `pages/login.page.ts`, while test behavior lives in `tests/login.spec.ts`. For your own application, copy `.env.example` to `.env`, change `APP_BASE_URL`, `LOGIN_USERNAME`, and `LOGIN_PASSWORD`, and update the selectors in the page object. Do not commit `.env` or real credentials.
+
 ## Project map
 
 - `tests/`: test files. Start with `tests/playwright-home.spec.ts`.
+- `pages/`: reusable page objects, including `login.page.ts`.
 - `playwright.config.ts`: browser, base URL, retries, and reporting settings.
 - `.github/workflows/playwright.yml`: GitHub Actions automation for pushes and pull requests.
 - `.vscode/tasks.json`: runnable VS Code tasks.
