@@ -1,3 +1,4 @@
+@debug
 Feature: Salesforce Trailhead login
   As a Trailhead learner
   I want to start signing in with my business email

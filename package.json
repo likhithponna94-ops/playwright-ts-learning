@@ -9,6 +9,7 @@
     "test:debug": "playwright test --debug",
     "bdd": "cucumber-js",
     "bdd:headed": "cross-env HEADED=true cucumber-js",
+    "debug": "cucumber-js --tags @debug",
     "@debug": "cucumber-js --tags @debug",
     "report": "playwright show-report",
     "typecheck": "tsc --noEmit"
