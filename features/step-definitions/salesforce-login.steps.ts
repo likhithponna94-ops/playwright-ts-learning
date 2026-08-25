@@ -38,6 +38,20 @@ When('I enter my business email', async () => {
   await page.getByRole('textbox', { name: 'Business email' }).fill(email);
 });
 
-Then('the Salesforce login flow should continue', async () => {
+Then('I should land on the Salesforce verification-code page and wait up to 20 seconds for the code to be entered manually', async () => {
   await expect(page.getByRole('textbox', { name: 'Business email' })).not.toBeVisible();
+
+  const verificationCode = page.locator(
+    'input[autocomplete="one-time-code"], input[inputmode="numeric"], input[name*="code" i]'
+  ).first();
+
+  await expect(verificationCode).toBeVisible({ timeout: 60_000 });
+  await expect.poll(async () => verificationCode.inputValue(), {
+    timeout: 20_000,
+    message: 'The verification code was not entered within 20 seconds'
+  }).not.toBe('');
+});
+
+Then('I automatically click the Submit code button identified by type "submit" after the code is entered', async () => {
+  await page.locator('button[type="submit"], input[type="submit"]').first().click();
 });
