@@ -1,0 +1,25 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Playwright: test",
+      "type": "shell",
+      "command": "npm.cmd test",
+      "group": "test",
+      "problemMatcher": []
+    },
+    {
+      "label": "Playwright: test headed",
+      "type": "shell",
+      "command": "npm.cmd run test:headed",
+      "group": "test",
+      "problemMatcher": []
+    },
+    {
+      "label": "Playwright: report",
+      "type": "shell",
+      "command": "npm.cmd run report",
+      "problemMatcher": []
+    }
+  ]
+}
