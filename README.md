@@ -25,6 +25,14 @@ The Salesforce login starter is written in Gherkin and TypeScript:
 
 Run only this feature with `npm.cmd run bdd`. To watch it in Chromium, run `npm.cmd run bdd:headed`. The default email is `likhith.ponna94@gmail.com`; override it without editing code:
 
+To run the tagged debug scenario only, use the quoted npm script name:
+
+```powershell
+npm.cmd run "@debug"
+```
+
+The equivalent Cucumber command is `npm.cmd run bdd -- --tags @debug`.
+
 ```powershell
 $env:SALESFORCE_EMAIL = "your-test-email@example.com"
 npm.cmd run bdd

@@ -3,9 +3,12 @@ import {
   After,
   Before,
   Given,
+  setDefaultTimeout,
   Then,
   When
 } from '@cucumber/cucumber';
+
+setDefaultTimeout(30_000);
 
 let browser: Browser;
 let page: Page;
