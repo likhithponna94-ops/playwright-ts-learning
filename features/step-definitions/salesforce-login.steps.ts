@@ -1,4 +1,4 @@
-import { chromium, expect, type Browser, type Page } from '@playwright/test';
+import { chromium, type Browser, type Page } from '@playwright/test';
 import {
   After,
   Before,
@@ -25,33 +25,24 @@ After(async () => {
   await browser.close();
 });
 
-Given('I open the Trailhead login page', async () => {
-  await page.goto('https://trailhead.salesforce.com/login/');
+Given('I open the Amazon login page', async () => {
+  await page.goto('https://www.amazon.com/your-account');
 });
 
-When('I click the {string} button', async (buttonText: string) => {
-  await page.getByText(buttonText, { exact: true }).click();
+When('I click on "Hello, sign in" button', async () => {
+  await page.locator('#nav-link-accountList-nav-line-1').click();
 });
 
-When('I enter my business email', async () => {
-  const email = process.env.SALESFORCE_EMAIL ?? 'likhith.ponna94@gmail.com';
-  await page.getByRole('textbox', { name: 'Business email' }).fill(email);
+When('I enter the phone number', async () => {
+  const phoneNumber = process.env.AMAZON_PHONE_NUMBER ?? '9441844543';
+  await page.getByRole('textbox', { name: 'Enter mobile number or email' }).fill(phoneNumber);
 });
 
-Then('I should land on the Salesforce verification-code page and wait up to 20 seconds for the code to be entered manually', async () => {
-  await expect(page.getByRole('textbox', { name: 'Business email' })).not.toBeVisible();
-
-  const verificationCode = page.locator(
-    'input[autocomplete="one-time-code"], input[inputmode="numeric"], input[name*="code" i]'
-  ).first();
-
-  await expect(verificationCode).toBeVisible({ timeout: 60_000 });
-  await expect.poll(async () => verificationCode.inputValue(), {
-    timeout: 20_000,
-    message: 'The verification code was not entered within 20 seconds'
-  }).not.toBe('');
+When('I select the email {string} in the text box under "Enter mobile number or email" section', async (email: string) => {
+  const emailToUse = process.env.AMAZON_EMAIL ?? email;
+  await page.getByRole('textbox', { name: 'Enter mobile number or email' }).fill(emailToUse);
 });
 
-Then('I automatically click the Submit code button identified by type "submit" after the code is entered', async () => {
-  await page.locator('button[type="submit"], input[type="submit"]').first().click();
+When('I click on "continue"', async () => {
+  await page.getByRole('button', { name: 'Continue', exact: true }).click();
 });
