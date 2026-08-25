@@ -14,7 +14,10 @@ let browser: Browser;
 let page: Page;
 
 Before(async () => {
-  browser = await chromium.launch({ headless: process.env.HEADED !== 'true' });
+  browser = await chromium.launch({
+    channel: 'msedge',
+    headless: process.env.HEADED !== 'true'
+  });
   page = await browser.newPage();
 });
 
